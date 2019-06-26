@@ -9,10 +9,11 @@ $.getJSON("/headers", function(data) {
 });
 
 
+
+
 // Whenever someone clicks a p tag
 $(document).on("click", "p", function() {
   // Empty the notes from the note section
-  // $("#card").show("fast");
   $("#notes").empty();
   // Save the id from the p tag
   var thisId = $(this).attr("data-id");
@@ -52,7 +53,7 @@ $(document).on("click", "#savenote", function() {
   // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
     method: "POST",
-    url: "/articles/" + thisId,
+    url: "/headers/" + thisId,
     data: {
       // Value taken from title input
       title: $("#titleinput").val(),

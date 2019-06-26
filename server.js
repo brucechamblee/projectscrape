@@ -2,11 +2,6 @@ var express = require("express");
 var logger = require("morgan");
 var mongoose = require("mongoose");
 
-//Handlebars Setup
-// var exphbs = require("express-handlebars");
-// app.engine("handlebars", exphbs({ defaultLayout: main}))
-// app.use(express.json());
-
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
@@ -37,6 +32,7 @@ mongoose.connect("mongodb://localhost/projectscrape", { useNewUrlParser: true })
 // Routes
 
 // A GET route for scraping the echoJS website
+
 app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios
   axios.get("http://www.ehow.com/").then(function(response) {
@@ -59,7 +55,11 @@ app.get("/scrape", function(req, res) {
         .children(".group-title-author")
         .children(".component-card-article-title").children('h2').children('a')
         .attr('href');
+      result.img = $(this)
+        .children(".component-card-article-image").children(".image-wrapper").children('a').children('img').attr('src');
+
       console.log(result)
+
   
       // Create a new Article using the `result` object built from scraping
       db.Header.create(result)
@@ -74,7 +74,7 @@ app.get("/scrape", function(req, res) {
     });
 
     // Send a message to the client
-    res.send("Scrape Complete");
+    res.redirect("/");
   });
 });
 
