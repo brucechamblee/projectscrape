@@ -1,12 +1,12 @@
 body { 
-  background-color: rgb(151, 153, 155);
+  background-image: url("/assets/img/ranger-4df6c1b6.png");
   color: white;
   text-align: center;
 }
 
-/* #card {
-  display: none;
-} */
+a {
+  color: purple
+}
 
 #wrapper {
   width: 960px;
